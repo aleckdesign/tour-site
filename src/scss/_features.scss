@@ -1,0 +1,64 @@
+@use 'abstracts' as *;
+
+.features {
+  display: grid;
+  //   height: 85vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(/img/hero.jpg);
+  background-size: cover;
+  background-position: top;
+  // transform: skewY(-6deg);
+  margin-top: -10rem;
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 8rem;
+    margin: 20rem 20rem;
+
+    // transform: skewY(6deg);
+
+    @media only screen and (max-width: $bp-largest) {
+      margin: 15rem 15rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      margin: 15rem 15rem;
+    }
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+
+    background-color: $color-grey-light-1;
+    opacity: 0.8;
+    text-align: center;
+    padding: 3rem;
+    border-radius: 3px;
+    box-shadow: 0 1rem 2rem rgba(black, 0.3);
+    transition: all 0.2s ease-in-out;
+
+    &__icon {
+      height: 8rem;
+      grid-row: 1 / 2;
+      margin-bottom: 4rem;
+      fill: url(/img/sprite.svg) $color-secondary-light;
+    }
+
+    &__p {
+      line-height: 1.8;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 1rem 2rem rgba(black, 0.5);
+    }
+  }
+}

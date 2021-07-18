@@ -1,0 +1,178 @@
+@use 'abstracts' as *;
+
+.popup-overlay {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(black, $alpha: 0.8);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+
+  @supports (-webkit-backdrop-filter: blur(10px)) or
+    (backdrop-filter: blur(10px)) {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background-color: rgba(black, $alpha: 0.3);
+  }
+
+  &:target {
+    opacity: 1;
+    visibility: visible;
+
+    .popup {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  //   &:target > .popup {
+  //     opacity: 1;
+  //   }
+}
+
+.popup {
+  width: 80%;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  border-radius: 3px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s 0.2s;
+
+  &__content {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    grid-template-rows: 10% 80% 1fr;
+    column-gap: 6rem;
+    row-gap: 3rem;
+
+    @media only screen and (max-width: $bp-large) {
+      grid-template-columns: 40% 1fr;
+      column-gap: 3rem;
+      row-gap: 2rem;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 3rem;
+    padding: 0 1rem;
+    color: black;
+    text-decoration: none;
+    z-index: 6;
+
+    &:hover {
+      color: $color-primary;
+      transform: scale(1.2);
+    }
+  }
+
+  &__heading {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    padding: 2rem 2rem;
+    margin-bottom: 0;
+
+    @media only screen and (max-width: $bp-small) {
+      grid-column: 1/-1;
+      text-align: center;
+    }
+  }
+
+  &__images {
+    grid-column: 1/2;
+    grid-row: 1/-1;
+
+    display: grid;
+    grid-template-rows: repeat(3, 25rem);
+
+    @media only screen and (max-width: $bp-large) {
+      grid-template-rows: repeat(3, 1fr);
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      display: none;
+    }
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+
+    &-1 {
+      grid-row: 1 / 2;
+      object-fit: cover;
+    }
+
+    &-2 {
+      grid-row: 2 / 3;
+      object-fit: cover;
+    }
+
+    &-3 {
+      grid-row: 3 / 4;
+      object-fit: cover;
+    }
+  }
+
+  &__text {
+    grid-column: 2/3;
+    grid-row: 2 / 3;
+
+    display: grid;
+    padding: 0 2rem;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+
+    @media only screen and (max-width: $bp-small) {
+      grid-column: 1/-1;
+      text-align: center;
+    }
+  }
+
+  &__heading-sub {
+    margin-bottom: 3rem;
+  }
+
+  &__paragraph {
+    columns: 2;
+    padding-right: 3rem;
+    column-gap: 5rem;
+    column-rule: 1px solid $color-grey-light-2;
+    line-height: 3.5rem;
+
+    @media only screen and (max-width: $bp-large) {
+      line-height: 2.8rem;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      columns: 1;
+      padding: 0 4rem;
+    }
+  }
+
+  &__btn-container {
+    padding: 1rem 2rem;
+
+    @media only screen and (max-width: $bp-small) {
+      grid-column: 1/-1;
+      justify-self: center;
+    }
+  }
+}
+
+// .popup-overlay:target .popup {
+//   opacity: 1;
+//   visibility: visible;
+// }

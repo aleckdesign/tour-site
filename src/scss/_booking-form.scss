@@ -1,0 +1,149 @@
+@use 'abstracts' as *;
+
+.book-section {
+  display: flex;
+  justify-content: center;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba($color-primary-light, 1),
+    rgba($color-primary-dark, 1)
+  );
+  padding: 20rem 0;
+}
+
+.form {
+  width: 80%;
+  background-image: url(../img/pexels-andrei-tanase-1271619.jpg);
+  background-size: cover;
+  background-position: center;
+
+  &__overlay {
+    background-color: rgba($color-white, 0.8);
+    clip-path: polygon(0 0, 70% 0, 55% 100%, 0 100%);
+    padding: 5rem;
+
+    @media only screen and (max-width: $bp-small) {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+  }
+
+  &__heading {
+    @media only screen and (max-width: $bp-small) {
+      text-align: center;
+      margin-bottom: 6rem;
+    }
+  }
+
+  &__content {
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 6rem;
+    margin-bottom: 5rem;
+    position: relative;
+
+    @media only screen and (max-width: $bp-small) {
+      width: 100%;
+    }
+  }
+
+  &__input {
+    padding: 1.4rem 2rem;
+    border-radius: 3px;
+    border: none;
+    border-bottom: 3px solid rgba(#fff, 0);
+    transition: all 0.3s;
+
+    &--name {
+      grid-column: 1 / -1;
+    }
+
+    &--email {
+      grid-column: 1 / -1;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba(black, 0.1);
+      border-bottom: 3px solid rgba($color-secondary-dark, 1);
+    }
+
+    &:valid {
+      border-bottom: 3px solid rgba($color-primary, 1);
+    }
+  }
+
+  &__input-label {
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    font-size: 1.6rem;
+    transition: all 0.5s;
+
+    &--name {
+      top: 7.5rem;
+    }
+
+    &--email {
+      top: 19rem;
+    }
+  }
+
+  &__input:placeholder-shown + &__input-label {
+    opacity: 0;
+    visibility: hidden;
+
+    &--name {
+      top: 1.6rem;
+    }
+    &--email {
+      top: 13rem;
+    }
+    // transform: translateY(-4rem);
+  }
+
+  &__radio-label {
+    // background-color: red;
+    user-select: none;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    cursor: pointer;
+    position: relative;
+    padding: 1rem 0 1rem 5.5rem;
+  }
+
+  &__radio-input {
+    display: none;
+    // visibility: hidden;
+    &:checked + ::after {
+      opacity: 1;
+    }
+  }
+
+  &__radio-button {
+    cursor: pointer;
+    position: absolute;
+    content: "";
+    top: -3px;
+    left: 0;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    border: 0.8rem solid rgba($color-primary, 1);
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 50%;
+      background-color: $color-primary;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  }
+}
